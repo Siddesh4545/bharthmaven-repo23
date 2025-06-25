@@ -1,44 +1,43 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.mt</groupId>
+    <groupId>com.acecloudacademy</groupId>
     <artifactId>maven-web-application</artifactId>
-    <packaging>war</packaging>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
 
-    <name>maven-web-application</name>
-    <description>Maven Web Project for Java Project</description>
-
-    <organization>
-        <name>Mithun Technologies</name>
-        <url>http://mithuntechnologies.com/</url>
-    </organization>
+    <name>Ace Cloud Academy Web App</name>
+    <description>Web application using javax.servlet and Spring 5</description>
+    <url>http://www.acecloudacademy.com</url>
 
     <properties>
-        <jdk.version>21</jdk.version>
-        <spring.version>6.0.11</spring.version>
-        <jetty.version>11.0.15</jetty.version>
-        <maven.compiler.source>${jdk.version}</maven.compiler.source>
-        <maven.compiler.target>${jdk.version}</maven.compiler.target>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring.version>5.3.36</spring.version>
     </properties>
 
     <dependencies>
-        <!-- Jakarta Servlet API -->
+        <!-- Javax Servlet API (for HttpServletRequest, HttpServletResponse, etc.) -->
         <dependency>
-            <groupId>jakarta.servlet</groupId>
-            <artifactId>jakarta.servlet-api</artifactId>
-            <version>5.0.0</version>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>4.0.1</version>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Spring 6 dependencies -->
+        <!-- Spring Framework (5.x to support javax.servlet) -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
             <version>${spring.version}</version>
         </dependency>
         <dependency>
@@ -51,20 +50,15 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
 
-        <!-- JSON Processing -->
+        <!-- JSON handling -->
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
             <version>20231013</version>
         </dependency>
 
-        <!-- Test Dependencies -->
+        <!-- Testing -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -81,50 +75,23 @@
 
     <build>
         <finalName>maven-web-application</finalName>
-
         <plugins>
             <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
+                <version>3.11.0</version>
                 <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>
 
-            <!-- WAR Plugin -->
+            <!-- WAR Packaging Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
-            </plugin>
-
-            <!-- Jetty Plugin -->
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty.version}</version>
-                <configuration>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <webApp>
-                        <contextPath>/maven-web-application</contextPath>
-                    </webApp>
-                </configuration>
-            </plugin>
-
-            <!-- Eclipse Plugin (optional) -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-eclipse-plugin</artifactId>
-                <version>2.10</version>
-                <configuration>
-                    <downloadSources>true</downloadSources>
-                    <downloadJavadocs>true</downloadJavadocs>
-                    <wtpversion>3.0</wtpversion>
-                    <wtpContextName>maven-web-application</wtpContextName>
-                </configuration>
             </plugin>
         </plugins>
     </build>
